@@ -1,18 +1,19 @@
 {
-  "name": "crm",
+  "name": "myapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Hello, World!",
   "main": "index.js",
-  "engines" : {
-    "node" : "10.0.0",
-    "npm" : "5.6.0"
+  "engines": {
+    "node": "10.0.0",
+    "npm": "5.6.0"
   },
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Ethan Cao",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3"
-  }
+  },
+  "devDependencies": {}
 }

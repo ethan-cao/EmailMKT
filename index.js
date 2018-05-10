@@ -4,7 +4,7 @@ const app = express();
 
 // create router handle watching for HTTP request accessing "/"
 app.get("/", (request, response)=>{
-    response.send({hi:"there!"});
+    response.send({hi:"world"});
 });
 
 // dynamic port binding, picked from Heroku, fallback to 5000

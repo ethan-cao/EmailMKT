@@ -1,6 +1,11 @@
+require("./models/users");
 require("./services/passport");  // only execute the script, since the script has no export, there is no return
 const express = require("express"); // common module system, currently supported in Node
+const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
+const keys = require("./config/keys");
+
+mongoose.connect(keys.mongoURI); 
 
 
 const app = express();

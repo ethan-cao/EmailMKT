@@ -1,23 +1,29 @@
-require("./models/users");
-require("./services/passport");  // only execute the script, since the script has no export, there is no return
 const express = require("express"); // common module system, currently supported in Node
 const mongoose = require("mongoose");
-const authRoutes = require("./routes/authRoutes");
+const cookieSession = require("cookie-session");   // mirror session in cookie
+const passport = require("passport");
 const keys = require("./config/keys");
-
-mongoose.connect(keys.mongoURI); 
-
-
-const app = express();
-authRoutes(app);
-
-// create router handle watching for HTTP request accessing "/"
-// app.get("/", (request, response)=>{
-//     response.send({hi:"world"});
-// });
-
+const authRoutes = require("./routes/authRoutes");
+// only execute the script, since the script has no export, there is no return
+require("./models/users");
+require("./services/passport");  
 
 // dynamic port binding, picked from Heroku, fallback to 5000
 const PORT = process.env.PORT || 5000;
-// Let Node listening to port 5000
+
+// start app
+const app = express();
+// start db
+mongoose.connect(keys.mongoURI); 
+
+// use cookie based token authentication
+app.use(cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000, // cookies remian for 30 days
+    keys : [keys.cookieKey]
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+authRoutes(app);
+
 app.listen(PORT);

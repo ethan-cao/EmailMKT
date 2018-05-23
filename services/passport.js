@@ -4,6 +4,19 @@ const keys = require("../config/keys");
 const mongoose = require("mongoose");
 const Users = mongoose.model("users");
 
+// Mongoose model instane --> id
+passport.serializeUser((user, done)=>{
+    done(null, user.id);
+});
+
+// id --> Mongoose model instane 
+passport.deserializeUser((id, done)=>{
+    Users.findById(id).then(user=>{
+            done(null, user);
+        });
+    done(null, id);
+});
+
 // Authenticate Google OAuth using passportJS
 passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
@@ -20,6 +33,4 @@ passport.use(new GoogleStrategy({
                     .then(user => done(null, user));
             }
         });
-
-
 }));

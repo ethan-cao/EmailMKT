@@ -18,13 +18,30 @@ passport.deserializeUser((id, done)=>{
 });
 
 // Authenticate Google OAuth using passportJS
-passport.use(new GoogleStrategy({
+passport.use(
+
+new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: "/auth/google/callback", // this should be registered in Authorized redirect URIs
     proxy: true   // use http 
-}, (accessToken, refreshToken, profile, done) => {
-    Users.findOne({googleId: profile.id})
+}, 
+
+async (accessToken, refreshToken, profile, done) => {
+    const existingUser = await Users.findOne({googleId: profile.id});
+
+    if (existingUser) {
+        done(null, existingUser); 
+    } else {
+        const user = await new Users({googleId: profile.id}).save()
+        done(null, user);
+    }
+ }
+
+// use Promise 
+/*  
+(accessToken, refreshToken, profile, done) => {
+    Users.findOne({googleId: profile.id}) 
         .then((existingUser) => {
             if (existingUser) {
                done(null, existingUser); 
@@ -34,4 +51,7 @@ passport.use(new GoogleStrategy({
                     .then(user => done(null, user));
             }
         });
-}));
+ }
+*/
+
+));

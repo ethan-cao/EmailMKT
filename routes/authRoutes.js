@@ -3,7 +3,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("../config/keys");
 
 module.exports = (app) => {
-// create router handle watching for HTTP request accessing "/"
+    // create router handle watching for HTTP request accessing "/"
     app.get("/", (req, res)=>{
         res.send({greeting:"hello, world"});
     });

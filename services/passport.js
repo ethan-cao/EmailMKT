@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Users = mongoose.model("users");
 
 // Mongoose model instane --> id
+// once authenticated, put user's id in side the cookie
 passport.serializeUser((user, done)=>{
     done(null, user.id);
 });
@@ -20,7 +21,9 @@ passport.deserializeUser((id, done)=>{
 // Authenticate Google OAuth using passportJS
 passport.use(
 
-new GoogleStrategy({
+new GoogleStrategy(
+
+{
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: "/auth/google/callback", // this should be registered in Authorized redirect URIs

@@ -31,6 +31,7 @@ class Header extends Component {
 }
 
 // invoke this with connect() to add the return object to this.props
+// the return object is based on state
 function mapStateToProps(state){
     return {auth:state.auth, test : 1};
 }

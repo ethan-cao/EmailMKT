@@ -1,5 +1,4 @@
 import "materialize-css/dist/css/materialize.min.css";  // no path means importing from node_modules
-
 import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";

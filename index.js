@@ -1,4 +1,4 @@
-const express = require("express"); // common mdule system, currently supported in Node
+const express = require("express"); // common module system, currently supported in Node
 const mongoose = require("mongoose");   // Object modelling in mongodb
 const cookieSession = require("cookie-session");   // mirror session in cookie
 const passport = require("passport");

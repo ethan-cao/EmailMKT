@@ -4,9 +4,9 @@ import {connect} from "react-redux";   // react-redux is for compatibility betwe
 import * as actions from "../actions";
 
 import Header from "./Header";
-const Landing = () => <h2>Landing</h2>;
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
+import Landing from "./Landing";
+import Dashboard from "./Dashboard";
+import SurveyNew from "./SurveyNew";
 
 class App extends Component {
     componentDidMount(){
@@ -23,9 +23,9 @@ class App extends Component {
                 */} 
                 <BrowserRouter>
                     <div>
-                        <Header/>
+                        <Header appName="MyApp"/>   {/* Component renders another component*/}
                         <Route path="/" component={Landing} exact />
-                        <Route path="/surveys" component={Dashboard} exact />
+                        <Route path="/surveys" exact render={ props => <Dashboard {...props} userID={"Ethan"} /> } />
                         <Route path="/surveys/new" component={SurveyNew} exact/>
                     </div>
                 </BrowserRouter>

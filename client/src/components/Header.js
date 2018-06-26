@@ -3,12 +3,22 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 class Header extends Component {
+    constructor(props){
+        super(props);
+
+        // this.state is declared inside of a constructor
+        // represents the initial "state" of this component instance
+        this.state = {
+            loginAgency : "Google"
+        };
+    }
+
     renderContent(){
         switch (this.props.auth){
             case null :
                 return ;
             case false:
-                return <li><a href="/auth/google">Login with Google</a></li>;
+                return <li><a href="/auth/google">Login with {this.state.loginAgency}</a></li>;
             default:   
                 return <li><a href="/api/logout">Logout</a></li>;
         }

@@ -16,3 +16,8 @@ ReactDOM.render(
     </Provider>, 
     document.querySelector("#root")
 );
+
+
+// access client environment variable
+console.log("key : " + process.env.REACT_APP_STRIPE_KEY); // defined in .env.development
+console.log("Environment is " + process.env.NODE_ENV);

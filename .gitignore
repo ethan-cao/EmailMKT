@@ -2,4 +2,4 @@ node_modules
 dev.js
 
 client/.env.development
-sclient/.env.production
+client/.env.production

@@ -6,11 +6,12 @@ const keys = require("../config/keys");
 // handing request proxied by React server as well, setting is client/package.json
 module.exports = (app) => {
     // create router handle watching for HTTP request accessing "/"
-    app.get("/", (req, res)=>{
+    app.get("/", (req, res) => {
         res.send({greeting:"hello, world"});
     });
 
     app.get("/auth/google", passport.authenticate("google", {scope:['profile', "email"]}));
+
     app.get(
         "/auth/google/callback", 
         passport.authenticate("google"),

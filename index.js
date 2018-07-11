@@ -2,9 +2,11 @@ const express = require("express"); // common module system, currently supported
 const mongoose = require("mongoose");   // Object modelling in mongodb
 const cookieSession = require("cookie-session");   // mirror session in cookie
 const passport = require("passport");
+const bodyParser = require("body-parser");
 
 const keys = require("./config/keys");
 const authRoutes = require("./routes/authRoutes");
+const billingRoutes = require("./routes/billingRoutes");
 // only execute the script, since the script has no export, there is no return
 require("./models/users");
 require("./services/passport");  
@@ -18,7 +20,8 @@ mongoose.connect(keys.mongoURI);
 // start app
 const app = express();
 
-// use cookie based token authentication
+// use cookie based token authentication, middle ware
+app.use(bodyParser.json());   // assign to req.body
 app.use(cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // cookies remian for 30 days
     keys : [keys.cookieKey]
@@ -28,5 +31,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 authRoutes(app);
+billingRoutes(app);
 
 app.listen(PORT);

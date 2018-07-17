@@ -24,8 +24,6 @@ export const fetchUser = () => async dispatch => {
 
 // after getting token from stripe, we can send the token to express server to update user's data
 export const handleToken = token => async dispatch => {
-    console.log("@@@ sending request");
-
     const res = await axios.post('/api/stripe', token);
     dispatch({ type: FETCH_USER, payload: res.data });
 };

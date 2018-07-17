@@ -15,6 +15,7 @@ class Header extends Component {
     }
 
     renderContent(){
+        // this.props.auth is the user model, set by authReducer.js
         switch (this.props.auth){
             case null :
                 return ;
@@ -23,14 +24,15 @@ class Header extends Component {
             default:   
                 return [
                     <li key="1"><Payments/></li>,
+                    <li key="3" style={{ margin: '0 10px' }}>
+                        Credits: {this.props.auth.credits}
+                    </li>,
                     <li key="2"><a href="/api/logout">Logout</a></li>
                 ];
         }
     }
 
     render(){
-        console.log("rendering Header");
-
         return (
             <nav>
                 {/* using className instead of class in JSX */}
@@ -50,9 +52,9 @@ class Header extends Component {
 
 // invoke this with connect() to add the return object to this.props
 // the return object is based on state
-function mapStateToProps(state){
-    return {auth:state.auth, test : 1};
-}
+function mapStateToProps({ auth }) {
+    return { auth };
+  }
 
 // set default value for this.props
 Header.defaultProps = {

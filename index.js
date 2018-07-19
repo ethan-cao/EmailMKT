@@ -1,14 +1,14 @@
 const express = require("express"); // common module system, currently supported in Node
 const mongoose = require("mongoose");   // Object modelling in mongodb
 const cookieSession = require("cookie-session");   // mirror session in cookie
-const passport = require("passport");
+const passport = require("passport");  // for authentication 
 const bodyParser = require("body-parser");
 
 const keys = require("./config/keys");
 const authRoutes = require("./routes/authRoutes");
 const billingRoutes = require("./routes/billingRoutes");
-// only execute the script, since the script has no export, there is no return
-require("./models/users");
+
+require("./models/users"); // only execute the script, since the script has no export, there is no return
 require("./services/passport");  
 
 // dynamic port binding, picked from Heroku, fallback to 500

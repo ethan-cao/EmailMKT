@@ -8,6 +8,7 @@ import reduxThunk from "redux-thunk";  // give access to redux dispatch function
 import App from "./components/App";
 import reducers from "./reducers";  // automatically access ./reducers/index.js
 
+// 1st param : reducer, 2nd : initial state, 3rd: middleware
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(

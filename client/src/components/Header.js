@@ -22,8 +22,8 @@ class Header extends Component {
             case false:
                 return <li><a href="/auth/google">Login with {this.state.loginAgency}</a></li>;
             default:   
+                // loged in
                 return [
-                    <li key="0"><button>Add</button></li>,
                     <li key="1"><Payments/></li>,
                     <li key="3" style={{ margin: '0 10px' }}>
                         Credits: {this.props.auth.credits}
@@ -62,4 +62,5 @@ Header.defaultProps = {
     appName : "MyAppDefault"
 };
 
+// since connect() is invoked, any state change will be trigger setState(), which will further refresh view
 export default connect(mapStateToProps)(Header);

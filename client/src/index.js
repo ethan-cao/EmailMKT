@@ -11,6 +11,9 @@ import reducers from "./reducers";  // automatically access ./reducers/index.js
 // 1st param : reducer, 2nd : initial state, 3rd: middleware
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
+// expose the store for debug purpose, should be removed in production
+window.store = store;
+
 ReactDOM.render(
     <Provider store={store}>
         <App/>

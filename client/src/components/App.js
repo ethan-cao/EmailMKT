@@ -10,7 +10,7 @@ import SurveyNew from "./SurveyNew";
 
 class App extends Component {
     componentDidMount(){
-        // preferred method for initial Ajax request
+        // preferred place for initial Ajax request
         this.props.fetchUser();
     }
     

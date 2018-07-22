@@ -1,8 +1,8 @@
 import axios from "axios"; // Promise based HTTP client 
 import {FETCH_USER} from "./types";
 
-// in React, action creator must return an action createor immmediately
-// but with redux-thunk,  action creator does not need to return an action immediately
+// in React, action creator(function) must return an action(object) immmediately
+// but with redux-thunk, action creator does not need to return an action immediately
 /*
 export const fetchUser = () => {
     const request = axios.get("/api/current_user");
@@ -18,8 +18,8 @@ export const fetchUser = () => {
 // any acitons pass into dispatch() will be automatially forward to reducers
 export const fetchUser = () => async dispatch => {
     const res = await axios.get("/api/current_user");   // express authRoutes.js generates the response
-    dispatch({type: FETCH_USER, payload: res.data});
      // here we create an action (an object): {type: FETCH_USER, layload: res}       
+    dispatch({type: FETCH_USER, payload: res.data});
 };
 
 // after getting token from stripe, we can send the token to express server to update user's data

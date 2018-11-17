@@ -35,5 +35,5 @@ class App extends Component {
 }
 
 // use connect() to give App component the ability to call action creators
-// so we can call this.prop.actionName()
+// so we can call this.prop.actionName() e.g. this.props.fetchUser()
 export default connect(null, actions)(App);

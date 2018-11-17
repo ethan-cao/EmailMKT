@@ -3,6 +3,7 @@ const mongoose = require("mongoose");   // Object modelling in mongodb
 const cookieSession = require("cookie-session");   // mirror session in cookie
 const passport = require("passport");  // for authentication 
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const keys = require("./config/keys");
 const authRoutes = require("./routes/authRoutes");
@@ -30,7 +31,24 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// Routing logic
+// the order matters, first check registed router
 authRoutes(app);
 billingRoutes(app);
+
+if (process.env.NODE_ENV === "production"){
+    // if request is not recognized, look into client/build
+    // Express serve production assets. e.g. main.js
+    app.use(express.static("client/build"));
+
+    // if request is not found in client/build, just return index.html
+    app.get("*", (req, res) => {
+        console.log("asd");
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    })
+}
+
+
 
 app.listen(PORT);

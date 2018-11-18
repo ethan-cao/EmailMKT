@@ -7,4 +7,4 @@ const userSchema = new Schema({
 });
  
 // use schema userSchema for Mongocollections 
-mongoose.model("users", userSchema); 
+mongoose.model("user", userSchema); 

@@ -4,7 +4,7 @@ const passport = require("passport");
 module.exports = app => {
     // create router handle watching for HTTP request accessing "/"
     app.get("/", (req, res) => {
-        res.send({greeting:"hello, world"});
+        res.send({greeting:"Hello, world"});
     });
 
     app.get("/auth/google", passport.authenticate("google", {scope:['profile', "email"]}));

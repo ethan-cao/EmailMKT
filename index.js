@@ -8,8 +8,10 @@ const path = require("path");
 const keys = require("./config/keys");
 const authRoutes = require("./routes/authRoutes");
 const billingRoutes = require("./routes/billingRoutes");
+const surveyRoutes = require("./routes/surveyRoutes");
 
-require("./models/users"); // only execute the script, since the script has no export, there is no return
+require("./models/User"); // only execute the script, since the script has no export, there is no return
+require("./models/Survey"); 
 require("./services/passport");  
 
 // dynamic port binding, picked from Heroku, fallback to 500
@@ -36,15 +38,15 @@ app.use(passport.session());
 // the order matters, first check registed router
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 if (process.env.NODE_ENV === "production"){
     // if request is not recognized, look into client/build
-    // Express serve production assets. e.g. main.js
+    // Express serve client production assets. e.g. main.js
     app.use(express.static("client/build"));
 
     // if request is not found in client/build, just return index.html
     app.get("*", (req, res) => {
-        console.log("asd");
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     })
 }

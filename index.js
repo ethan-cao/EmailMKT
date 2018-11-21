@@ -5,14 +5,15 @@ const passport = require("passport");  // for authentication
 const bodyParser = require("body-parser");
 const path = require("path");
 
+require("./models/User"); // only execute the script, since the script has no export, there is no return
+require("./models/Survey"); 
+require("./services/passport");  
+
 const keys = require("./config/keys");
 const authRoutes = require("./routes/authRoutes");
 const billingRoutes = require("./routes/billingRoutes");
 const surveyRoutes = require("./routes/surveyRoutes");
 
-require("./models/User"); // only execute the script, since the script has no export, there is no return
-require("./models/Survey"); 
-require("./services/passport");  
 
 // dynamic port binding, picked from Heroku, fallback to 500
 const PORT = process.env.PORT || 5000;

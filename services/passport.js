@@ -2,7 +2,7 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("../config/keys");
 const mongoose = require("mongoose");
-const Users = mongoose.model("users");
+const Users = mongoose.model("user");
 
 // Mongoose model instane --> id
 // once authenticated, put user's id in side the cookie

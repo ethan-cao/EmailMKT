@@ -1,0 +1,49 @@
+const sendgrid = require("sendgrid");
+const helper = sendgrid.mail;
+const keys = require("../config/keys");
+
+// This class just follows sendgrid API requirement, no need to understand
+
+class Mailer extends helper.Mail{
+
+    constructor({subject, recipients}, contentHTML){
+        super();
+
+        this.from_email = new helper.Email("no-reply@xxx.com");
+        this.subject = subject;
+        this.body = new helper.Content("text/html", contentHTML);
+        this.recipients = this.formatAddresses(recipients);
+
+        this.addContent(this.body);
+        this.addClickTracking();
+
+        this.addRecipients();
+    }
+
+    formatAddresses(recipients){
+        return recipients.map(( {email} ) => {
+            return new helper.Email(email);
+        });
+    }
+
+    addClickTracking(){
+        const trackingSettings = new helper.TrackingSettings();
+        const clickTracking = new helper.ClickTracking(true, true);
+
+        trackingSettings.setClickTracking(clickTracking);
+        this.addTrackingSettings(trackingSettings);
+    }
+
+    addRecipients(){
+        const personalize = new helper.Personalization();
+
+        this.recipients.array.forEach(recipient => {
+            personalize.addTo(recipient);
+        });
+
+        this.addPersonalization(personalize);
+    }
+
+}
+
+moudle.exports = Mailer;

@@ -2,11 +2,6 @@ const passport = require("passport");
 
 // handing request proxied by React server as well, setting is client/package.json
 module.exports = app => {
-    // create router handle watching for HTTP request accessing "/"
-    app.get("/", (req, res) => {
-        res.send({greeting:"Hello, world"});
-    });
-
     app.get("/auth/google", passport.authenticate("google", {scope:['profile', "email"]}));
 
     app.get(

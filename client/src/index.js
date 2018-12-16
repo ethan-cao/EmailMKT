@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import reduxThunk from "redux-thunk";  // give access to redux dispatch function
+import axios from "axios";
 
 import App from "./components/App";
 import reducers from "./reducers";  // automatically access ./reducers/index.js
@@ -13,6 +14,7 @@ const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 // expose the store for debug purpose, should be removed in production
 window.store = store;
+window.axios = axios;
 
 ReactDOM.render(
     <Provider store={store}>

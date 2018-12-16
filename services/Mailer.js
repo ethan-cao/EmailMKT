@@ -38,7 +38,7 @@ class Mailer extends helper.Mail{
     addRecipients(){
         const personalize = new helper.Personalization();
 
-        this.recipients.array.forEach(recipient => {
+        this.recipients.forEach(recipient => {
             personalize.addTo(recipient);
         });
 
@@ -60,4 +60,4 @@ class Mailer extends helper.Mail{
 
 }
 
-moudle.exports = Mailer;
+module.exports = Mailer;

@@ -14,15 +14,15 @@ const authRoutes = require("./routes/authRoutes");
 const billingRoutes = require("./routes/billingRoutes");
 const surveyRoutes = require("./routes/surveyRoutes");
 
+// start app
+const app = express();
 
 // dynamic port binding, picked from Heroku, fallback to 500
 const PORT = process.env.PORT || 5000;
+app.listen(PORT);
 
 // start db
 mongoose.connect(keys.mongoURI); 
-
-// start app
-const app = express();
 
 // use cookie based token authentication, middle ware
 app.use(bodyParser.json());   // assign to req.body
@@ -34,9 +34,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// Routing logic
-// the order matters, first check registed router
+// Routing logic, the order matters, first check registed router
 authRoutes(app);
 billingRoutes(app);
 surveyRoutes(app);
@@ -51,7 +49,3 @@ if (process.env.NODE_ENV === "production"){
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     })
 }
-
-
-
-app.listen(PORT);

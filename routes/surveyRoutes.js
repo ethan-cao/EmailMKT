@@ -6,14 +6,14 @@ const Mailer = require("../services/Mailer");
 const surveyTemplate = require("..//services/emailTemplates/surveyTemplate");
 
 module.exports = app => {
+
     app.get("/api/surveys/thanks", (req, res)=>{
-        console.log("1")
+        console.log("thanks");
         res.send("Thanks!");
     });
 
     // we can pass arbitray number of arguments to it, and all arguments will be executed in order
     app.post("/api/surveys", requireLogin, requireCredits, async (req, res)=>{
-        console.log("2")
         const {title, subject, body, recipients} = req.body;
         const survey = new Survey({
             title,

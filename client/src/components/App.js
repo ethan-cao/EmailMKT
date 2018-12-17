@@ -6,7 +6,7 @@ import * as actions from "../actions";
 import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
-import SurveyNew from "./SurveyNew";
+import SurveyNew from "./surveys/SurveyNew";
 
 class App extends Component {
     componentDidMount(){
@@ -22,7 +22,7 @@ class App extends Component {
                     when url match (exact for exact match), then certain component will be displayed
                 */} 
                 <BrowserRouter>
-                    <div>
+                    <div className="container">
                         <Header appName="MyApp"/>   {/* Component renders another component*/}
                         <Route path="/" component={Landing} exact />
                         <Route path="/surveys" exact render={ props => <Dashboard {...props} userID={"Ethan"} /> } />

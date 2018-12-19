@@ -45,10 +45,10 @@ function validate(values){
         errors.title = "Title cannot be empty";
     }
 
-    FIELDS.forEach( {title, name} => {
+//    FIELDS.forEach( {title, name} => {
             // if there is something wrong with title, reduxForm will associate an property to Field title to indicate the error
         // errors[title] = "This field cannot be empty";
-    });
+  //  });
 
     return errors;
 }

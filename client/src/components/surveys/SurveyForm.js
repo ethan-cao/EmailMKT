@@ -13,7 +13,6 @@ const FIELDS = [
 ];
 
 class SurveyForm extends Component{
-
     render(){
         return (
             <div>
@@ -36,10 +35,26 @@ class SurveyForm extends Component{
             </div>
         );
     }
+}
 
+function validate(values){
+    // values is a map containing all form input data
+    const errors = {};
+            
+    if (!values.title){
+        errors.title = "Title cannot be empty";
+    }
+
+    FIELDS.forEach( {title, name} => {
+            // if there is something wrong with title, reduxForm will associate an property to Field title to indicate the error
+        // errors[title] = "This field cannot be empty";
+    });
+
+    return errors;
 }
 
 // reduxForm allows the component to communicate with redux store
 export default reduxForm({
-    form : "SurverForm"
+    validate,   // function validate will be called anytime user submitted the form
+    form: "SurverForm"
 })(SurveyForm);

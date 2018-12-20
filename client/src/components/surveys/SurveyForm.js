@@ -1,7 +1,9 @@
+import _ from "lodash";
 import React, { Component} from "react";
 import { Field, reduxForm } from "redux-form";
 import SurveyField from "./SurveyField";
 import {Link} from "react-router-dom";
+import validateEmails from "../../util/validateEmails";
 
 // Survey is container component
 
@@ -9,7 +11,7 @@ const FIELDS = [
     {name: "title", label: "Survey title" },
     {name: "subject", label: "Survey subject" },
     {name: "body", label: "Survey body" },
-    {name: "recipients", label: "Survey recipients" }
+    {name: "emails", label: "Survey recipients" }
 ];
 
 class SurveyForm extends Component{
@@ -19,7 +21,8 @@ class SurveyForm extends Component{
                 {/* input value is automatically store in redux store with a key called title (name property) 
                     handleSumbit is added by reduxForm
                 */}
-                <form onSubmit={this.props.handleSubmit(values => {console.log(values)})}>
+                {/* <form onSubmit={this.props.handleSubmit(values => {console.log(values)})}> */}
+                <form onSubmit = {this.props.onSurveySubmit} >
                     {FIELDS.map(field =>(
                         <Field key={field.name} type="text" name={field.name} label={field.label} component={SurveyField}/> 
                     ))}
@@ -38,17 +41,18 @@ class SurveyForm extends Component{
 }
 
 function validate(values){
-    // values is a map containing all form input data
-    const errors = {};
-            
-    if (!values.title){
-        errors.title = "Title cannot be empty";
-    }
+    // values is a map containing all form input data, FIELDS.name -> input value
 
-//    FIELDS.forEach( {title, name} => {
-            // if there is something wrong with title, reduxForm will associate an property to Field title to indicate the error
-        // errors[title] = "This field cannot be empty";
-  //  });
+    const errors = {};
+
+    errors.emails = validateEmails(values.emails);
+
+    _.each(FIELDS, ({name}) =>{
+        if (!values[name]){
+        // if something wrong with title, reduxForm associates an property to Field title to indicate the error
+            errors[name] = "This field cannot be empty";
+        }
+    });
 
     return errors;
 }

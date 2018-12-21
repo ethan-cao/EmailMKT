@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {reduxForm} from "redux-form";
 import SurveyForm from "./SurveyForm";
 import SurveyFormReview from "./SurveyFormReview";
 
@@ -22,9 +23,10 @@ class SurveyNew extends Component {
 
     render(){ 
         return (
-            // ternary operation is supported, but if-else is not supported
+            // ternary operation is supported, but if-else is not supported in JSX
             <div>
-                { this.state.showFormReview ?  
+                { 
+                    this.state.showFormReview ?  
                     <SurveyFormReview onCancel = {this.toggleReview}/> : 
                     <SurveyForm onSurveySubmit = {this.toggleReview} /> 
                 }
@@ -33,4 +35,8 @@ class SurveyNew extends Component {
     }
 }
 
-export default SurveyNew;
+
+// export default SurveyNew;
+export default reduxForm({
+    form: "surveyForm"
+})(SurveyNew);

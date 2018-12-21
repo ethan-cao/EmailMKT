@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { Component} from "react";
+import React, {Component} from "react";
 import { Field, reduxForm } from "redux-form";
 import SurveyField from "./SurveyField";
 import {Link} from "react-router-dom";
@@ -31,9 +31,8 @@ class SurveyForm extends Component{
     }
 }
 
-function validate(values){
+function validate(values) {
     // values is a map containing all form input data, FIELDS.name -> input value
-
     const errors = {};
 
     errors.emails = validateEmails(values.emails);
@@ -45,12 +44,12 @@ function validate(values){
         }
     });
 
-    return errors;
+    // return errors;
 }
 
 // reduxForm allows the component to communicate with redux store
 export default reduxForm({
     validate,   // function validate will be called anytime user submitted the form
-    form: "SurverForm",   // From name
+    form: "surveyForm",   // Form name
     destroyOnUnmount : false //  keep data even if the form is not mounted on UI, after review, data remains
 })(SurveyForm);

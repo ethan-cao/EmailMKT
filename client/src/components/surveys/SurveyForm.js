@@ -4,24 +4,15 @@ import { Field, reduxForm } from "redux-form";
 import SurveyField from "./SurveyField";
 import {Link} from "react-router-dom";
 import validateEmails from "../../util/validateEmails";
-
-// Survey is container component
-
-const FIELDS = [
-    {name: "title", label: "Survey title" },
-    {name: "subject", label: "Survey subject" },
-    {name: "body", label: "Survey body" },
-    {name: "emails", label: "Survey recipients" }
-];
+import FIELDS from "./formFields";
 
 class SurveyForm extends Component{
-    render(){
+    render() {
         return (
             <div>
                 {/* input value is automatically store in redux store with a key called title (name property) 
                     handleSumbit is added by reduxForm
                 */}
-                {/* <form onSubmit={this.props.handleSubmit(values => {console.log(values)})}> */}
                 <form onSubmit = {this.props.onSurveySubmit} >
                     {FIELDS.map(field =>(
                         <Field key={field.name} type="text" name={field.name} label={field.label} component={SurveyField}/> 
@@ -60,5 +51,6 @@ function validate(values){
 // reduxForm allows the component to communicate with redux store
 export default reduxForm({
     validate,   // function validate will be called anytime user submitted the form
-    form: "SurverForm"
+    form: "SurverForm",   // From name
+    destroyOnUnmount : false //  keep data even if the form is not mounted on UI, after review, data remains
 })(SurveyForm);

@@ -28,7 +28,10 @@ export const handleToken = token => async dispatch => {
     dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-export const submitSurvey = values => {
-    console.log("submitSurveys");
-    return {type:"t"};
+export const submitSurvey = (values, history) => async dispatch => {
+    // handled in surveyRoutes.js
+    const res = await axios.post("/api/surveys", values);
+    history.push("/surveys");  // after sending, redirect user back to /surveys
+
+    dispatch({ type: FETCH_USER, payload: res.data });
 };

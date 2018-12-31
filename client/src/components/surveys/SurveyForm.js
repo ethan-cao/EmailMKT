@@ -35,7 +35,7 @@ function validate(values) {
     // values is a map containing all form input data, FIELDS.name -> input value
     const errors = {};
 
-    errors.emails = validateEmails(values.emails);
+    errors.recipients = validateEmails(values.recipients);
 
     _.each(FIELDS, ({name}) =>{
         if (!values[name]){

@@ -1,3 +1,6 @@
+const _ = require("lodash");
+const {Path} = require('path-parser');
+const {URL} = require("url");
 const requireLogin = require("../middlewares/requireLogin");
 const requireCredits = require("../middlewares/requireCredits");
 const mongoose = require("mongoose");
@@ -8,8 +11,41 @@ const surveyTemplate = require("..//services/emailTemplates/surveyTemplate");
 module.exports = app => {
 
     app.get("/api/surveys/thanks", (req, res)=>{
-        console.log("thanks");
         res.send("Thanks!");
+    });
+
+    // check https://app.sendgrid.com/settings/mail_settings  Event Notification
+    // sendGrid notifies this app server once event happens after certain period of time
+    app.post("/api/surveys/webhooks", async (req, res) => {
+        const pathPattern = new Path("/api/surveys/:surveyId/:choice"); 
+        
+        _.chain(req.body)
+            .map(({email, url}) => {
+                const pathName = new URL(url).pathname; // path is something like /api/surveys/5c2a18c49e886220f1ecbdbc/yes
+                const match = pathPattern.test(pathName);  // extract surveyId and choice
+                if (match) {
+                    return {email, surveyId: match.surveyId, choice: match.choice};
+                }
+            })
+            .compact()
+            .uniqBy("email", "surveyId")
+            .each( ({surveyId, email, choice}) => {
+                // execute data update in MongoDB for better performance 
+
+                // use 1st param to find, use 2nd param to update the found record
+                Survey.updateOne({
+                    _id : surveyId,
+                    recipients : {
+                        $elemMatch : {email : email, responded : false}
+                    }
+                }, {
+                    $inc : { [choice] : 1},  // increase
+                    $set : { "recipients.$.responded" : true }    // $ refers to the matched record
+                }).exec();
+            })
+            .value();
+
+        res.send({});
     });
 
     // we can pass arbitray number of arguments to it, and all arguments will be executed in order

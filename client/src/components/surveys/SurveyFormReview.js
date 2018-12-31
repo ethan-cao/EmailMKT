@@ -1,10 +1,11 @@
 import React from "react";  
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 import _ from "lodash";
 import FIELDS from "./formFields";
 import * as actions from "../../actions";
 
-const SurveyFormReview = ({onCancel, formValues, submitSurvey}) => (
+const SurveyFormReview = ({onCancel, formValues, submitSurvey, history}) => (
     <div>
         <h5> Please confirm </h5>
         <div>
@@ -17,7 +18,7 @@ const SurveyFormReview = ({onCancel, formValues, submitSurvey}) => (
         <button className="yellow darken-3 btn-flat white-text" onClick = {onCancel}>
             Back
         </button>
-        <button className="green btn-flat right white-text" onClick={ ()=>submitSurvey(formValues) }>
+        <button className="green btn-flat right white-text" onClick={ ()=>submitSurvey(formValues, history) }>
             Send surveys 
             <i className="material-icons right">email</i>
         </button>
@@ -30,4 +31,5 @@ function mapStateToProps(state){
     return {formValues : state.form.surveyForm.values};
 }
 
-export default connect(mapStateToProps, actions)(SurveyFormReview);
+// use withRouter to make SurveyFormReivew aware of react router information
+export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));

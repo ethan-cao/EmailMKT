@@ -2,7 +2,6 @@ const express = require("express"); // common module system, currently supported
 const mongoose = require("mongoose");   // Object modelling in mongodb
 const cookieSession = require("cookie-session");   // mirror session in cookie
 const passport = require("passport");  // for authentication 
-const bodyParser = require("body-parser");
 const path = require("path");
 
 require("./models/User"); // only execute the script, since the script has no export, there is no return
@@ -17,7 +16,7 @@ const surveyRoutes = require("./routes/surveyRoutes");
 // start app
 const app = express();
 
-// dynamic port binding, picked from Heroku, fallback to 500
+// dynamic port binding, picked from Heroku, fallback to 5000
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
 
@@ -25,12 +24,11 @@ app.listen(PORT);
 mongoose.connect(keys.mongoURI); 
 
 // use cookie based token authentication, middle ware
-app.use(bodyParser.json());   // assign to req.body
 app.use(cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // cookies remian for 30 days
     keys : [keys.cookieKey]
 }));
-
+app.use(express.json()); // assign to req.body
 app.use(passport.initialize());
 app.use(passport.session());
 

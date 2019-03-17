@@ -1,1 +1,1 @@
-Hello, World!
+Example Email marketing App

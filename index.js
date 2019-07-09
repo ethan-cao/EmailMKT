@@ -18,7 +18,9 @@ const app = express();
 
 // dynamic port binding, picked from Heroku, fallback to 5000
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+app.listen(PORT, ()=>{
+  console.log("Server listening at port " + PORT);
+});
 
 // start db
 mongoose.connect(keys.mongoURI); 
@@ -37,7 +39,9 @@ authRoutes(app);
 billingRoutes(app);
 surveyRoutes(app);
 
-if (process.env.NODE_ENV === "production"){
+
+// in production mode, client assets are pre-built and available as static resources 
+if (process.env.NODE_ENV === "production") {
     // if request is not recognized, look into client/build
     // Express serve client production assets. e.g. main.js
     app.use(express.static("client/build"));

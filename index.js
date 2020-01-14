@@ -18,9 +18,7 @@ const app = express();
 
 // dynamic port binding, picked from Heroku, fallback to 5000
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, ()=>{
-  console.log("Server listening at port " + PORT);
-});
+app.listen(PORT, () => console.log("Server listening at port " + PORT));
 
 // start db
 mongoose.connect(keys.mongoURI); 

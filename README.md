@@ -12,9 +12,9 @@
 	    DB: MongoDB  
 	    host: Heroku    
    	 - 3rd party service:  
-    authentication: Google+ API, passport  
-    payment: Stripe 
-    email: Sendgrid  
+    authentication: Google+ API, passport    
+    payment: Stripe  
+    email: Sendgrid      
     
  - How to use
 	 - Login with your google account

@@ -65,12 +65,12 @@ module.exports = app => {
             body,
             recipients: recipients.split(",").map(email => ({email:email.trim()})),
             _user : req.user.id,
-            dataSent : Date.now()
+            dateSent : Date.now()
         })
 
         const mailer = new Mailer(survey, surveyTemplate(survey));
 
-        console.log(JSON.stringify(mailer));
+        // console.log(JSON.stringify(mailer));
 
         try{
             await mailer.send();  // wait for finishing sending all emails  

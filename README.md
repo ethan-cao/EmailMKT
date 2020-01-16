@@ -8,9 +8,9 @@
     package manager: npm  
     task runner: npm  
 	 - Backend:  
-	    server:NodeJS, Express
-	    DB: MongoDB
-	    host: Heroku  
+	    server:NodeJS, Express  
+	    DB: MongoDB  
+	    host: Heroku    
    	 - 3rd party service:  
     authentication: Google+ API, passport  
     payment: Stripe 

@@ -70,6 +70,8 @@ module.exports = app => {
 
         const mailer = new Mailer(survey, surveyTemplate(survey));
 
+        console.log(JSON.stringify(mailer));
+
         try{
             await mailer.send();  // wait for finishing sending all emails  
 

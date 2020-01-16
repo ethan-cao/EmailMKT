@@ -2,7 +2,7 @@ const sendgrid = require("sendgrid");
 const helper = sendgrid.mail;
 const keys = require("../config/keys");
 
-// This class just follows sendgrid API requirement, no need to understand
+// This class just follows sendgrid API requirement
 
 class Mailer extends helper.Mail{
 
@@ -21,13 +21,13 @@ class Mailer extends helper.Mail{
         this.addRecipients();
     }
 
-    formatAddresses(recipients){
+    formatAddresses(recipients) {
         return recipients.map(( {email} ) => {
             return new helper.Email(email);
         });
     }
 
-    addClickTracking(){
+    addClickTracking() {
         const trackingSettings = new helper.TrackingSettings();
         const clickTracking = new helper.ClickTracking(true, true);
 
@@ -35,7 +35,7 @@ class Mailer extends helper.Mail{
         this.addTrackingSettings(trackingSettings);
     }
 
-    addRecipients(){
+    addRecipients() {
         const personalize = new helper.Personalization();
 
         this.recipients.forEach(recipient => {
@@ -46,17 +46,19 @@ class Mailer extends helper.Mail{
     }
 
     // send email to different people
-    async send(){
+    async send() {
         const request = this.sgApi.emptyRequest({
             method: "POST",
             path: "/v3/mail/send",
             body: this.toJSON()
         });
 
+        console.log("sending");
        const response = await this.sgApi.API(request);
+        console.log("finished");
+
        return response;
     }
-
 
 }
 

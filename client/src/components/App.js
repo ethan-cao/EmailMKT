@@ -23,7 +23,7 @@ class App extends Component {
                 */} 
                 <BrowserRouter>
                     <div className="container">
-                        <Header appName="MyApp"/>   {/* Component renders another component*/}
+                        <Header appName="Email Campaign"/>   {/* Component renders another component*/}
                         <Route path="/" component={Landing} exact />
                         <Route path="/surveys" exact render={ props => <Dashboard {...props} userID={"Ethan"} /> } />
                         <Route path="/surveys/new" component={SurveyNew} exact/>

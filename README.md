@@ -2,7 +2,7 @@ Email marketing full stack App
 
 Frontend:  
     view: React + materialize-css  
-    model: Redux 
+    model: Redux  
     utility: Lodash  
     package manager: npm  
     task runner: npm  

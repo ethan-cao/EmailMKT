@@ -25,7 +25,7 @@
 	 - After clicking pay $5, and refresh the page, you will get 5 credits
 	 - Click the red ADD button on bottom right to create a new email campaign	 ![alt text](https://raw.githubusercontent.com/ethan-cao/EmailMKT/master/instruction/3.png "step 3")
 	 - Fill title, subject, email body and recipients (use comma , to separate multiple recipients). For this version, the mail template contains a simple yes/no question.
-	 ![alt text](https://raw.githubusercontent.com/ethan-cao/EmailMKT/master/instruction/4.png "step 4")
+	 ![alt text](https://raw.githubusercontent.com/ethan-cao/EmailMKT/master/instruction/4.png "step 4") 
 	 - Click Next and review what has been filled. If everything is correct, click Send Surveys to send the filled content to all recipients.
 	 ![alt text](https://raw.githubusercontent.com/ethan-cao/EmailMKT/master/instruction/5.png "step 5")
 	 - Back on page [https://radiant-lowlands-92286.herokuapp.com/surveys](https://radiant-lowlands-92286.herokuapp.com/surveys), created email campaigns are displayed and you can see how many recipients picked yes and no.
